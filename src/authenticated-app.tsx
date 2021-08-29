@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import React from 'react';
+import { Row } from './components/lib';
 import { useAuth } from './context/auth-context';
 import { ProjectListScreen } from './screens/projectList';
 
@@ -19,9 +20,18 @@ const AuthenticatedApp = () => {
 
 	return (
 		<Container>
-			<PageHeader>
-				<button onClick={logout}>登出</button>
-			</PageHeader>
+			<Header between={true}>
+				<HeaderLeft gap={true}>
+					<h2>Logo</h2>
+					<h2>项目</h2>
+					<h2>用户</h2>
+				</HeaderLeft>
+
+				<HeaderRight>
+					<button onClick={logout}>登出</button>
+				</HeaderRight>
+			</Header>
+
 			<Main>
 				<ProjectListScreen />
 			</Main>
@@ -29,17 +39,24 @@ const AuthenticatedApp = () => {
 	);
 };
 
+const Header = styled(Row)``;
+
+const HeaderLeft = styled(Row)``;
+
+const HeaderRight = styled.div``;
+
 const Container = styled.div`
 	display: grid;
-	grid-template-rows: 6rem, calc(100vh - 6rem);
+	grid-template-rows: 6rem, 1fr;
+	height: 100vh;
 `;
 
-const PageHeader = styled.header`
-	height: 6rem;
-`;
+// const PageHeader = styled.header`
+// 	height: 6rem;
+// `;
 
 const Main = styled.main`
-	height: calc(100vh - 6rem);
+	/* height: calc(100vh - 6rem); */
 `;
 
 export default AuthenticatedApp;
