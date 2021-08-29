@@ -1,3 +1,4 @@
+import { Table } from 'antd';
 import React from 'react';
 import { User } from './search-panel';
 
@@ -16,6 +17,18 @@ interface ListProps {
 
 export const List = (props: ListProps) => {
 	const { list, users } = props;
+
+	return (
+		<Table
+			pagination={false}
+			columns={[
+				{ title: '名称', dataIndex: 'name', sorter: (a, b) => a.name.localeCompare(b.name) },
+				{ title: '负责人', render: (value, project) => <span> {users.find((user) => user.id === project.personId)?.name || '未知'}</span> },
+			]}
+			dataSource={list}
+		/>
+	);
+
 	return (
 		<table>
 			<thead>
