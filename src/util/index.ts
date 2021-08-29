@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const isFalsy = (value: unknown) => (value === 0 ? false : !value);
 
@@ -18,10 +18,10 @@ export const cleanObject = (obj: object) => {
 	return result;
 };
 
-export const useMount = (callback: () => void) => {
+export const useMount = (callback: () => void, dep: [] = []) => {
 	useEffect(() => {
 		callback();
-	});
+	}, [...dep]);
 };
 
 export const useDebounce = <V>(value: V, delay?: number) => {

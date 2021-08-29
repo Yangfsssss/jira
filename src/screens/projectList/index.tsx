@@ -1,10 +1,8 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
-import * as qs from 'qs';
+import React, { useEffect, useState } from 'react';
+import { cleanObject, useDebounce } from '../../util';
+import { useHttp } from '../../util/http';
 import { List } from './list';
 import { SearchPanel } from './search-panel';
-
-import { cleanObject, useDebounce } from '../../util';
 
 //使用JS时，大部分的错误是在运行时被发现的
 //我们希望，在静态代码中，就能找到其中的一些错误 ->强类型
@@ -15,28 +13,20 @@ export const ProjectListScreen = () => {
 		name: '',
 		personId: '',
 	});
-
 	const [users, setUsers] = useState([]);
-
 	const [list, setList] = useState([]);
 
-	const debouncedParam = useDebounce(param,500);
+	const debouncedParam = useDebounce(param, 500);
+
+	const client = useHttp();
 
 	useEffect(() => {
-		fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(debouncedParam))}`).then(async (res) => {
-			if (res.ok) {
-				setList(await res.json());
-			}
-		});
+		client('projects', { data: cleanObject(debouncedParam) }).then(setList);
 	}, [debouncedParam]);
 
 	useEffect(() => {
-		fetch(`${apiUrl}/users`).then(async (res) => {
-			if (res.ok) {
-				setUsers(await res.json());
-			}
-		});
-	}, []);
+		client('users').then(setUsers);
+	},[]);
 
 	return (
 		<div>
