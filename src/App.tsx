@@ -1,20 +1,12 @@
 import React from 'react';
-
-import { ProjectListScreen } from './screens/projectList';
-import LoginScreen from './screens/login';
-import ChapterTest from './screens/chapter-test';
-
-import logo from './logo.svg';
 import './App.css';
+import AuthenticatedApp from './authenticated-app';
+import { useAuth } from './context/auth-context';
+import UnauthenticatedApp from './unauthenticated-app';
 
 function App() {
-	return (
-		<div className='App'>
-			{/* <ProjectListScreen /> */}
-			{/* <ChapterTest /> */}
-			<LoginScreen />
-		</div>
-	);
-}
+	const { user } = useAuth();
 
+	return <div className='App'>{user ? <AuthenticatedApp /> : <UnauthenticatedApp />}</div>;
+}
 export default App;
