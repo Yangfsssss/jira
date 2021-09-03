@@ -5,7 +5,7 @@ import { useAuth } from './context/auth-context';
 import { ProjectListScreen } from './screens/projectList';
 
 import { ReactComponent as SoftwareLogo } from './assets/software-logo.svg';
-import { Dropdown, Menu } from 'antd';
+import { Button, Dropdown, Menu } from 'antd';
 
 /**
  * grid 和 flex 各自的应用场景
@@ -35,11 +35,15 @@ const AuthenticatedApp = () => {
 						overlay={
 							<Menu>
 								<Menu.Item key={'logout'}>
-									<a onClick={logout}>登出</a>
+									<Button type='link' onClick={logout}>
+										登出
+									</Button>
 								</Menu.Item>
 							</Menu>
 						}>
-						<a onClick={(e) => e.preventDefault()}>Hi,{user?.name}</a>
+						<Button type='link' onClick={(e) => e.preventDefault()}>
+							Hi,{user?.name}
+						</Button>
 					</Dropdown>
 				</HeaderRight>
 			</Header>
