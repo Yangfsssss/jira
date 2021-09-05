@@ -1,12 +1,10 @@
 import styled from '@emotion/styled';
 import { Typography } from 'antd';
-import React, { useEffect, useState } from 'react';
-import { cleanObject, useDebounce } from '../../util';
-import { useHttp } from '../../util/http';
+import React, { useState } from 'react';
+import { useDebounce } from '../../util';
 import { useProject } from '../../util/project';
-import { useAsync } from '../../util/use-async';
 import { useUsers } from '../../util/user';
-import { List, Project } from './list';
+import { List } from './list';
 import { SearchPanel } from './search-panel';
 
 //使用JS时，大部分的错误是在运行时被发现的
@@ -26,7 +24,9 @@ export const ProjectListScreen = () => {
 		<Container>
 			<h1>项目列表</h1>
 			<SearchPanel param={param} users={users || []} setParam={setParam}></SearchPanel>
+
 			{error ? <Typography.Text type={'danger'}>{error.message}</Typography.Text> : null}
+
 			<List loading={isLoading} dataSource={list || []} users={users || []}></List>
 		</Container>
 	);

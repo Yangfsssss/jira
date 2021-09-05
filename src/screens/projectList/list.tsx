@@ -18,7 +18,7 @@ interface ListProps extends TableProps<Project> {
 }
 
 export const List = (props: ListProps) => {
-	const { users, ...otherProps } = props;
+	const { users, ...others } = props;
 
 	return (
 		<Table
@@ -33,7 +33,7 @@ export const List = (props: ListProps) => {
 					render: (value, project) => <span> {project.created ? dayjs(project.created).format('YYYY-MM-DD') : '无'}</span>,
 				},
 			]}
-			{...otherProps}
+			{...others}
 		/>
 	);
 

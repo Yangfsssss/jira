@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const isFalsy = (value: unknown) => (value === 0 ? false : !value);
+// const isFalsy = (value: unknown) => (value === 0 ? false : !value);
 
 //解决删除value为false字面量的属性的bug
 const isVoid = (value: unknown) => value === undefined || value === null || value === '';

@@ -53,44 +53,44 @@ export const useHttp = () => {
 };
 
 //类型别名，interface在这种情况下无法代替type
-type favoriteNumber = string | number;
-let roseFavoriteNumber: favoriteNumber = '6';
+// type favoriteNumber = string | number;
+// let roseFavoriteNumber: favoriteNumber = '6';
 
 //interface也无法实现utility type
-type Person = {
-	name: string;
-	age: number;
-	height: number;
-};
-const xiaoMing: Partial<Person> = {};
-type shenMiRen = Omit<Person, 'name' | 'age'>;
+// type Person = {
+// 	name: string;
+// 	age: number;
+// 	height: number;
+// };
+// const xiaoMing: Partial<Person> = {};
+// type shenMiRen = Omit<Person, 'name' | 'age'>;
 
 //keyof操作符，能将类型别名中的key全部取出，并组合成一个新的类型别名，类似于Object.keys()
-type PersonKeys = keyof Person;
+// type PersonKeys = keyof Person;
 //in操作符，代表遍历，类似于for...in...
 
 //Pick的实现
 //From T, pick a set of properties whose keys are in the union K
-type PersonOnlyName = Pick<Person, 'name'>;
+// type PersonOnlyName = Pick<Person, 'name'>;
 //类似于Person.name
-type Pick<T, K extends keyof T> = {
-	[P in K]: T[P];
-};
+// type Pick<T, K extends keyof T> = {
+// 	[P in K]: T[P];
+// };
 
 //Exclude的实现
 //Exclude from T those types that are assignable to U
-type AgeAndHeight = Exclude<PersonKeys, 'name'>;
+// type AgeAndHeight = Exclude<PersonKeys, 'name'>;
 //类似于Person.map(item=>item !== 'name')
-type Exclude<T, U> = T extends U ? never : T;
+// type Exclude<T, U> = T extends U ? never : T;
 
 //Partial的实现
 //Make all properties in T optional
-type Partial<T> = {
+// type Partial<T> = {
 	//有限表达式，问号（?）与冒号（:）不参与运算
 	//类似于`${for const P in Object.keys(T)}?:${T[P]}`
-	[P in keyof T]?: T[P];
-};
+// 	[P in keyof T]?: T[P];
+// };
 
 //Omit的实现
 //Construct a type with the properties of T except for those in type K.
-type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>;
+// type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>;
