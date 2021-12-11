@@ -25,9 +25,6 @@ export const ProjectListScreen = () => {
 
   return (
     <Container>
-      {/* <Helmet>
-        <title>项目列表</title>
-      </Helmet> */}
       <h1>项目列表</h1>
       <SearchPanel param={param} users={users || []} setParam={setParam}></SearchPanel>
 
