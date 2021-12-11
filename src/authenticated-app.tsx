@@ -6,8 +6,10 @@ import { ProjectListScreen } from './screens/project-list';
 
 import { ReactComponent as SoftwareLogo } from './assets/software-logo.svg';
 import { Button, Dropdown, Menu } from 'antd';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router';
 import { ProjectScreen } from 'screens/project';
+import { resetRoute } from './util';
 
 /**
  * grid 和 flex 各自的应用场景
@@ -21,8 +23,6 @@ import { ProjectScreen } from 'screens/project';
  */
 
 const AuthenticatedApp = () => {
-  const value: any = undefined;
-
   return (
     <Container>
       <PageHeader />
@@ -32,7 +32,9 @@ const AuthenticatedApp = () => {
           <Routes>
             <Route path={'/projects'} element={<ProjectListScreen />} />
             <Route path={'/projects/:projectId/*'} element={<ProjectScreen />} />
+            <Route index element={<ProjectListScreen />} />
           </Routes>
+          {/* <Navigate to={'/projects'} /> */}
         </Router>
       </Main>
     </Container>
@@ -45,7 +47,9 @@ const PageHeader = () => {
   return (
     <Header between={true}>
       <HeaderLeft gap={true}>
-        <SoftwareLogo width={'18rem'} color={'rgb(38,132,255)'} />
+        <Button type="link" onClick={resetRoute}>
+          <SoftwareLogo width={'18rem'} color={'rgb(38,132,255)'} />
+        </Button>
         <h2>项目</h2>
         <h2>用户</h2>
       </HeaderLeft>
