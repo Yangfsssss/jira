@@ -7,11 +7,10 @@ import { User } from './search-panel';
 //react负责生产中转数据供不同环境的实现层消费
 import { Link } from 'react-router-dom';
 
-//TODO 把所有ID改成number类型
 export interface Project {
-  id: string;
+  id: number;
   name: string;
-  personId: string;
+  personId: number;
   pin: boolean;
   organization: string;
   created: number;
