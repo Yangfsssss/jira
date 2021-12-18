@@ -6,6 +6,8 @@ import { User } from './search-panel';
 //react-router 和 react-router-dom的关系类似于react 和react-dom/react-native/react-vr...
 //react负责生产中转数据供不同环境的实现层消费
 import { Link } from 'react-router-dom';
+import { Pin } from 'components/pin';
+import { useEditProject } from 'util/project';
 
 export interface Project {
   id: number;
@@ -18,15 +20,24 @@ export interface Project {
 
 interface ListProps extends TableProps<Project> {
   users: User[];
+  refresh?: () => void;
 }
 
 export const List = (props: ListProps) => {
-  const { users, ...others } = props;
+  const { users, refresh, ...others } = props;
+
+  const { mutate } = useEditProject();
+
+  const pinProject = (id: number) => (pin: boolean) => mutate({ id, pin }).then(refresh);
 
   return (
     <Table
       pagination={false}
       columns={[
+        {
+          title: <Pin checked={true} disabled={true} />,
+          render: (value, project) => <Pin checked={project.pin} onCheckedChange={pinProject(project.id)} />,
+        },
         {
           title: '名称',
           // dataIndex: 'name',
