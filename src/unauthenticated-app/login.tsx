@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAuth } from '../context/auth-context';
-import { Form, Input, Typography } from 'antd';
+import { Form, Input } from 'antd';
 import { LongButton } from '.';
 import { useAsync } from '../util/use-async';
 

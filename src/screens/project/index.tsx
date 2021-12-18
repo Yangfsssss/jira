@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Route, Routes } from 'react-router';
 import { EpicScreen } from 'screens/epic';
 import { KanbanScreen } from 'screens/kanban';

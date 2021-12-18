@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { Typography } from 'antd';
-import React, { useState } from 'react';
+import React from 'react';
+import { useUrlQueryParam } from 'util/url';
 // import { Helmet } from 'react-helmet';
 import { useDebounce, useDocumentTitle } from '../../util';
 import { useProject } from '../../util/project';
@@ -12,10 +13,16 @@ import { SearchPanel } from './search-panel';
 //我们希望，在静态代码中，就能找到其中的一些错误 ->强类型
 
 export const ProjectListScreen = () => {
-  const [param, setParam] = useState({
-    name: '',
-    personId: '',
-  });
+  // const [, setParam] = useState({
+  //   name: '',
+  //   personId: '',
+  // });
+
+  const [param, setParam] = useUrlQueryParam(['name', 'personId']);
+  console.log('param', param);
+
+  // setParam({ name: '222' });
+
   const debouncedParam = useDebounce(param, 500);
 
   const { isLoading, error, data: list } = useProject(debouncedParam);
@@ -34,6 +41,8 @@ export const ProjectListScreen = () => {
     </Container>
   );
 };
+
+ProjectListScreen.whyDidYouRender = false;
 
 const Container = styled.div`
   padding: 3.2rem;

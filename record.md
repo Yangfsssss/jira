@@ -39,3 +39,31 @@ react-router/react-router-dom
 ---
 
 8.4
+Link kanban
+Route kanban
+Link epic
+Route epic
+Navigate \*
+Route index
+
+---
+
+8.5
+useUrlQueryParam
+useSearchParams
+reduce
+as const
+[key:string] & [key in string]
+
+---
+
+8.6
+why-did-you-render
+K[]
+[dependencies]
+useMemo
+由 useState 产出的状态，只有调用 setState 后，React 才会认为它的值发生了改变
+
+---
+
+8.7
