@@ -13,7 +13,7 @@ import { useProjectsSearchParams } from './utils';
 //使用JS时，大部分的错误是在运行时被发现的
 //我们希望，在静态代码中，就能找到其中的一些错误 ->强类型
 
-export const ProjectListScreen = (props: { setProjectModalOpen: (isOpen: boolean) => void }) => {
+export const ProjectListScreen = (props: { projectButton: JSX.Element }) => {
   useDocumentTitle('项目列表');
 
   const [param, setParam] = useProjectsSearchParams();
@@ -24,16 +24,14 @@ export const ProjectListScreen = (props: { setProjectModalOpen: (isOpen: boolean
     <Container>
       <Row between={true}>
         <h1>项目列表</h1>
-        <Button type="link" onClick={() => props.setProjectModalOpen(true)}>
-          创建项目
-        </Button>
+        {props.projectButton}
       </Row>
       <SearchPanel param={param} users={users || []} setParam={setParam}></SearchPanel>
 
       {error ? <Typography.Text type={'danger'}>{error.message}</Typography.Text> : null}
 
       <List
-        setProjectModalOpen={props.setProjectModalOpen}
+        projectButton={props.projectButton}
         loading={isLoading}
         dataSource={list || []}
         users={users || []}
