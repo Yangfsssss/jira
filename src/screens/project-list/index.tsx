@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
-import { Typography } from 'antd';
+import { Button, Typography } from 'antd';
+import { Row } from 'components/lib';
 import React from 'react';
 // import { Helmet } from 'react-helmet';
 import { useDebounce, useDocumentTitle } from '../../util';
@@ -12,7 +13,7 @@ import { useProjectsSearchParams } from './utils';
 //使用JS时，大部分的错误是在运行时被发现的
 //我们希望，在静态代码中，就能找到其中的一些错误 ->强类型
 
-export const ProjectListScreen = () => {
+export const ProjectListScreen = (props: { setProjectModalOpen: (isOpen: boolean) => void }) => {
   useDocumentTitle('项目列表');
 
   const [param, setParam] = useProjectsSearchParams();
@@ -21,12 +22,23 @@ export const ProjectListScreen = () => {
 
   return (
     <Container>
-      <h1>项目列表</h1>
+      <Row between={true}>
+        <h1>项目列表</h1>
+        <Button type="link" onClick={() => props.setProjectModalOpen(true)}>
+          创建项目
+        </Button>
+      </Row>
       <SearchPanel param={param} users={users || []} setParam={setParam}></SearchPanel>
 
       {error ? <Typography.Text type={'danger'}>{error.message}</Typography.Text> : null}
 
-      <List loading={isLoading} dataSource={list || []} users={users || []} refresh={retry} />
+      <List
+        setProjectModalOpen={props.setProjectModalOpen}
+        loading={isLoading}
+        dataSource={list || []}
+        users={users || []}
+        refresh={retry}
+      />
     </Container>
   );
 };

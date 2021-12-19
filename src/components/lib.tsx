@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Spin, Typography } from 'antd';
+import { Button, Spin, Typography } from 'antd';
 import { DevTools } from 'jira-dev-tool';
 
 export const Row = styled.div<{
@@ -41,3 +41,7 @@ export const FullPageErrorFallBack = ({ error }: { error: Error | null }) => {
     </FullPage>
   );
 };
+
+export const ButtonNoPadding = styled(Button)`
+  padding: 0;
+`;
