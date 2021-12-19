@@ -128,3 +128,15 @@ Prop Drilling
 10.4
 currentState
 useUndo
+
+---
+
+10.5
+reducer(state,action)
+useReducer(reducer,initialState)
+
+---
+10.6
+redux
+redux-vanillaJS
+store.subscribe(render)

@@ -1,5 +1,5 @@
 import { useMountedRef } from './index';
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useReducer } from 'react';
 
 interface State<D> {
   error: Error | null;
@@ -17,37 +17,53 @@ const defaultConfig = {
   throwOnError: false,
 };
 
+const useSafeDispatch = <T>(dispatch: (...args: T[]) => void) => {
+  const mountedRef = useMountedRef();
+
+  //为什么不直接返回dispatch？
+  //可以直接返回dispatch，但由于每次useReducer生成的dispatch不相等，所以无法用useCallback做优化
+  return useCallback(
+    (...args: T[]) => (mountedRef.current === true ? dispatch(...args) : undefined),
+    [dispatch, mountedRef]
+  );
+};
+
 export const useAsync = <D>(initialState?: State<D>, initialConfig?: typeof defaultConfig) => {
   const config = { ...defaultConfig, ...initialConfig };
 
-  const [state, setState] = useState<State<D>>({
-    ...defaultInitialStat,
-    ...initialState,
-  });
+  const [state, dispatch] = useReducer(
+    (state: State<D>, action: Partial<State<D>>) => {
+      return { ...state, ...action };
+    },
+    {
+      ...defaultInitialStat,
+      ...initialState,
+    }
+  );
 
-  const mountedRef = useMountedRef();
+  const safeDispatch = useSafeDispatch(dispatch);
 
   //useState直接传入函数的意义是：惰性初始化；所以要用useState保存函数，不能只接传入函数
   const [retry, setRetry] = useState(() => () => {});
 
   const setData = useCallback(
     (data: D) =>
-      setState({
+      safeDispatch({
         data,
         stat: 'success',
         error: null,
       }),
-    []
+    [safeDispatch]
   );
 
   const setError = useCallback(
     (error: Error) =>
-      setState({
+      safeDispatch({
         error,
         stat: 'error',
         data: null,
       }),
-    []
+    [safeDispatch]
   );
 
   //run用来处理异步请求
@@ -63,15 +79,11 @@ export const useAsync = <D>(initialState?: State<D>, initialConfig?: typeof defa
         }
       });
 
-      setState((prevState) => {
-        return { ...prevState, stat: 'loading' };
-      });
+      safeDispatch({ stat: 'loading' });
 
       return promise
         .then((data) => {
-          if (mountedRef.current === true) {
-            setData(data);
-          }
+          setData(data);
 
           return data;
         })
@@ -85,7 +97,7 @@ export const useAsync = <D>(initialState?: State<D>, initialConfig?: typeof defa
           return error;
         });
     },
-    [config.throwOnError, mountedRef, setData, setError]
+    [config.throwOnError, safeDispatch, setData, setError]
   );
 
   return {
