@@ -90,7 +90,7 @@ useMemo 值的解构和传导
 9.3
 Pin
 useEditProject
-hook 的使用模式
+custom hook 的使用模式
 函数参数获取的先后，柯里化
 
 ---
@@ -105,3 +105,8 @@ ref.current
 
 9.5
 retry
+
+---
+10.1
+useMemo
+useCallback解决依赖及依赖链
