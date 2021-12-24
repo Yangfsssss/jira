@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import React, { useState } from 'react';
+import React from 'react';
 import { ButtonNoPadding, Row } from './components/lib';
 import { useAuth } from './context/auth-context';
 import { ProjectListScreen } from './screens/project-list';
@@ -25,64 +25,34 @@ import { ProjectPopover } from 'components/project-popover';
  */
 
 const AuthenticatedApp = () => {
-  const [projectModalOpen, setProjectModalOpen] = useState(false);
-
   return (
     <Container>
-      <PageHeader
-        projectButton={
-          <ButtonNoPadding type="link" onClick={() => setProjectModalOpen(true)}>
-            创建项目
-          </ButtonNoPadding>
-        }
-      />
+      <PageHeader />
 
       <Main>
         <Router>
           <Routes>
-            <Route
-              path={'/projects'}
-              element={
-                <ProjectListScreen
-                  projectButton={
-                    <ButtonNoPadding type="link" onClick={() => setProjectModalOpen(true)}>
-                      创建项目
-                    </ButtonNoPadding>
-                  }
-                />
-              }
-            />
+            <Route path={'/projects'} element={<ProjectListScreen />} />
             <Route path={'/projects/:projectId/*'} element={<ProjectScreen />} />
-            <Route
-              index
-              element={
-                <ProjectListScreen
-                  projectButton={
-                    <ButtonNoPadding type="link" onClick={() => setProjectModalOpen(true)}>
-                      创建项目
-                    </ButtonNoPadding>
-                  }
-                />
-              }
-            />
+            <Route index element={<ProjectListScreen />} />
           </Routes>
           {/* <Navigate to={'/projects'} /> */}
         </Router>
       </Main>
 
-      <ProjectModal projectModalOpen={projectModalOpen} onClose={() => setProjectModalOpen(false)} />
+      <ProjectModal />
     </Container>
   );
 };
 
-const PageHeader = (props: { projectButton: JSX.Element }) => {
+const PageHeader = () => {
   return (
     <Header between={true}>
       <HeaderLeft gap={true}>
         <ButtonNoPadding type="link" onClick={resetRoute}>
           <SoftwareLogo width={'18rem'} color={'rgb(38,132,255)'} />
         </ButtonNoPadding>
-        <ProjectPopover projectButton={props.projectButton} />
+        <ProjectPopover />
         <span>用户</span>
       </HeaderLeft>
 
