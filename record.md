@@ -193,3 +193,12 @@ url-param:editingProjectId
 useAddProject
 useEditProject
 useProject
+
+---
+
+11.6-11.7
+optimistic-update
+use-optimistic-options:useConfig
+useAddConfig
+useEditConfig
+useDeleteConfig
