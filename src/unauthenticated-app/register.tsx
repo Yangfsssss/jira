@@ -27,8 +27,6 @@ const RegisterScreen = ({ onError }: { onError: (error: Error) => void }) => {
   return (
     <div>
       <Form onFinish={handleSubmit}>
-        {/* {error ? <Typography.Text type={'danger'}>{error.message}</Typography.Text> : null} */}
-
         <Form.Item name="username" rules={[{ required: true, message: '请输入用户名' }]}>
           <Input placeholder={'用户名'} type="text" id="username" />
         </Form.Item>

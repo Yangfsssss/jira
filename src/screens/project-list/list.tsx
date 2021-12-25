@@ -30,9 +30,11 @@ export const List = (props: ListProps) => {
 
   const { mutate } = useEditProject();
 
-  const { open } = useProjectModal();
+  const { startEdit } = useProjectModal();
 
-  const pinProject = (id: number) => (pin: boolean) => mutate({ id, pin }).then(refresh);
+  const editingProject = (id: number) => startEdit(id);
+
+  const pinProject = (id: number) => (pin: boolean) => mutate({ id, pin });
 
   return (
     <Table
@@ -65,16 +67,13 @@ export const List = (props: ListProps) => {
           ),
         },
         {
-          render: () => {
+          render: (value, project) => {
             return (
               <Dropdown
                 overlay={
                   <Menu>
-                    <Menu.Item>
-                      <ButtonNoPadding type="link" onClick={() => open()}>
-                        编辑
-                      </ButtonNoPadding>
-                    </Menu.Item>
+                    <Menu.Item onClick={() => editingProject(project.id)}>编辑</Menu.Item>
+                    <Menu.Item>删除</Menu.Item>
                   </Menu>
                 }
               >

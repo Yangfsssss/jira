@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 import { Button, Typography } from 'antd';
-import { ButtonNoPadding, Row } from 'components/lib';
+import { ButtonNoPadding, ErrorBox, Row } from 'components/lib';
 import React from 'react';
 // import { Helmet } from 'react-helmet';
 import { useDebounce, useDocumentTitle } from '../../util';
-import { useProject } from '../../util/project';
+import { useProjects } from '../../util/project';
 import { useUsers } from '../../util/user';
 import { List } from './list';
 import { SearchPanel } from './search-panel';
@@ -19,7 +19,7 @@ export const ProjectListScreen = () => {
   const { open } = useProjectModal();
 
   const [param, setParam] = useProjectsSearchParams();
-  const { isLoading, error, data: list, retry } = useProject(useDebounce(param, 500));
+  const { isLoading, error, data: list } = useProjects(useDebounce(param, 500));
   const { data: users } = useUsers();
 
   return (
@@ -32,14 +32,14 @@ export const ProjectListScreen = () => {
       </Row>
       <SearchPanel param={param} users={users || []} setParam={setParam}></SearchPanel>
 
-      {error ? <Typography.Text type={'danger'}>{error.message}</Typography.Text> : null}
+      <ErrorBox error={error} />
 
-      <List loading={isLoading} dataSource={list || []} users={users || []} refresh={retry} />
+      <List loading={isLoading} dataSource={list || []} users={users || []} />
     </Container>
   );
 };
 
-ProjectListScreen.whyDidYouRender = true;
+ProjectListScreen.whyDidYouRender = false;
 
 const Container = styled.div`
   padding: 3.2rem;

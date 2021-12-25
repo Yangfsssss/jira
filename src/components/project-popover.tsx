@@ -2,11 +2,11 @@ import styled from '@emotion/styled';
 import { Divider, List, Popover, Typography } from 'antd';
 import React from 'react';
 import { useProjectModal } from 'screens/project-list/utils';
-import { useProject } from 'util/project';
+import { useProjects } from 'util/project';
 import { ButtonNoPadding } from './lib';
 
 export const ProjectPopover = () => {
-  const { data: projects, isLoading } = useProject();
+  const { data: projects, isLoading } = useProjects();
 
   const { open } = useProjectModal();
 
