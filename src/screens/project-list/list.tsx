@@ -2,23 +2,15 @@ import { Dropdown, Menu, Modal, Table } from 'antd';
 import type { TableProps } from 'antd';
 import dayjs from 'dayjs';
 import React from 'react';
-import { User } from './search-panel';
+import { User } from '../../types/user';
 //react-router 和 react-router-dom的关系类似于react 和react-dom/react-native/react-vr...
 //react负责生产中转数据供不同环境的实现层消费
 import { Link } from 'react-router-dom';
 import { Pin } from 'components/pin';
-import { useDeleteProject, useEditProject } from 'util/project';
+import { useDeleteProject, useEditProject } from 'utils/project';
 import { ButtonNoPadding } from 'components/lib';
-import { useProjectModal, useProjectsQueryKey } from './utils';
-
-export interface Project {
-  id: number;
-  name: string;
-  personId: number;
-  pin: boolean;
-  organization: string;
-  created: number;
-}
+import { useProjectModal, useProjectsQueryKey } from './util';
+import { Project } from '../../types/project';
 
 interface ListProps extends TableProps<Project> {
   users: User[];

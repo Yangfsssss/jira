@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import React, { useState } from 'react';
+import React from 'react';
 import { ButtonNoPadding, Row } from './components/lib';
 import { useAuth } from './context/auth-context';
 import { ProjectListScreen } from './screens/project-list';
@@ -9,7 +9,7 @@ import { Button, Dropdown, Menu } from 'antd';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Route, Routes } from 'react-router';
 import { ProjectScreen } from 'screens/project';
-import { resetRoute } from './util';
+import { resetRoute } from './utils';
 import { ProjectModal } from 'screens/project-list/project-modal';
 import { ProjectPopover } from 'components/project-popover';
 
@@ -36,8 +36,8 @@ const AuthenticatedApp = () => {
             <Route path={'/projects/:projectId/*'} element={<ProjectScreen />} />
             <Route index element={<ProjectListScreen />} />
           </Routes>
-          {/* <Navigate to={'/projects'} /> */}
         </Main>
+        {/* <Navigate to={'/projects'} /> */}
 
         <ProjectModal />
       </Router>

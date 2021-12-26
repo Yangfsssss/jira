@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-import { useProject } from 'util/project';
-import { useSetUrlSearchParams, useUrlQueryParam } from 'util/url';
+import { useProject } from 'utils/project';
+import { useSetUrlSearchParams, useUrlQueryParam } from 'utils/url';
 
 //项目列表搜索的参数
 export const useProjectsSearchParams = () => {

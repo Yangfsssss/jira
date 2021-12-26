@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { Button, Drawer, Form, Input, Spin } from 'antd';
-import { useProjectModal, useProjectsQueryKey } from './utils';
+import { useProjectModal, useProjectsQueryKey } from './util';
 import { UserSelect } from 'components/user-select';
-import { useAddProject, useEditProject } from 'util/project';
+import { useAddProject, useEditProject } from 'utils/project';
 import { useForm } from 'antd/lib/form/Form';
 import { ErrorBox } from 'components/lib';
 import styled from '@emotion/styled';
@@ -21,6 +21,11 @@ export const ProjectModal = () => {
     });
   };
 
+  const closeModal = () => {
+    form.resetFields();
+    close();
+  };
+
   const title = editingProject ? '编辑项目' : '创建项目';
 
   useEffect(() => {
@@ -28,7 +33,7 @@ export const ProjectModal = () => {
   }, [editingProject, form]);
 
   return (
-    <Drawer forceRender onClose={close} visible={projectModalOpen} width={'100%'}>
+    <Drawer forceRender onClose={closeModal} visible={projectModalOpen} width={'100%'}>
       <Container>
         {isLoading ? (
           <Spin size={'large'} />

@@ -2,7 +2,7 @@ import { Form, Input } from 'antd';
 import React from 'react';
 import { LongButton } from '.';
 import { useAuth } from '../context/auth-context';
-import { useAsync } from '../util/use-async';
+import { useAsync } from '../utils/use-async';
 
 const RegisterScreen = ({ onError }: { onError: (error: Error) => void }) => {
   const { register } = useAuth();
@@ -19,7 +19,7 @@ const RegisterScreen = ({ onError }: { onError: (error: Error) => void }) => {
 
     try {
       await run(register(values));
-    } catch (e) {
+    } catch (e: any) {
       onError(e);
     }
   };
