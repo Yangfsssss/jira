@@ -202,3 +202,8 @@ use-optimistic-options:useConfig
 useAddConfig
 useEditConfig
 useDeleteConfig
+
+---
+
+11.8
+useSetUrlSearchParams
