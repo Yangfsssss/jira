@@ -256,3 +256,18 @@ TasksContainer
 
 12.5
 searchPanel
+
+---
+
+12.6
+flex 容器子元素高度
+flex:1
+useRouteType
+
+---
+
+12.7
+父：overflow:hidden
+子：overflow-x:scroll
+CreateKanban
+CreateTask

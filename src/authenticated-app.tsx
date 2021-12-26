@@ -107,6 +107,8 @@ const Container = styled.div`
 
 const Main = styled.main`
   /* height: calc(100vh - 6rem); */
+  display: flex;
+  overflow: hidden;
 `;
 
 export default AuthenticatedApp;
