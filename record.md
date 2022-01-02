@@ -1,3 +1,18 @@
+##目录结构
+-src
+--assets
+--components
+--context
+(--imgs)
+--screens
+--types
+--unauthenticated-app
+--utils
+-App
+-auth-provider
+-authenticated-app
+-wdyr
+
 ## 1211:
 
 npm install prettier
@@ -271,3 +286,16 @@ useRouteType
 子：overflow-x:scroll
 CreateKanban
 CreateTask
+
+---
+
+12.8-12.9
+useTask
+useAddTask
+useTaskModal
+TaskModal
+initialValues/setFieldsValue
+
+Mark
+useDeleteKanban
+useDeleteTask
